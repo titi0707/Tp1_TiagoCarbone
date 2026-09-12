@@ -6,7 +6,7 @@ public class PlayerJump : MonoBehaviour
 {
     public float jumpForce = 7f;
 
-    private bool isGrounded = false;
+    public bool IsGrounded { get; private set; }
     private Rigidbody rb;
 
     void Awake()
@@ -19,10 +19,10 @@ public class PlayerJump : MonoBehaviour
         var keyboard = Keyboard.current;
         if (keyboard == null) return;
 
-        if (isGrounded && keyboard.spaceKey.wasPressedThisFrame)
+        if (IsGrounded && keyboard.spaceKey.wasPressedThisFrame)
         {
             rb.linearVelocity = new Vector3(rb.linearVelocity.x, jumpForce, rb.linearVelocity.z);
-            isGrounded = false;
+            IsGrounded = false;
         }
     }
 
@@ -32,7 +32,7 @@ public class PlayerJump : MonoBehaviour
         {
             if (contact.normal.y > 0.5f)
             {
-                isGrounded = true;
+                IsGrounded = true;
                 return;
             }
         }
@@ -40,6 +40,6 @@ public class PlayerJump : MonoBehaviour
 
     void OnCollisionExit(Collision collision)
     {
-        isGrounded = false;
+        IsGrounded = false;
     }
 }

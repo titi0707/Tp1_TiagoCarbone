@@ -30,7 +30,7 @@ public class ScoreManager : MonoBehaviour
     {
         if (scoreText != null)
         {
-            scoreText.text = "Monedas: " + score + " / " + totalCollectibles;
+            scoreText.text = "Joyas: " + score + " / " + totalCollectibles;
         }
     }
 }

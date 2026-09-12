@@ -10,16 +10,21 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody rb;
     private MovingPlatform currentPlatform;
     private Dash dash;
-
+    private WallJump wallJump;
     void Awake()
     {
         rb = GetComponent<Rigidbody>();
         dash = GetComponent<Dash>();
+        wallJump = GetComponent<WallJump>();
     }
 
     void FixedUpdate()
     {
-        
+        if (wallJump != null && wallJump.IsWallJumping)
+{
+    rb.linearVelocity = wallJump.WallJumpVelocity;
+    return;
+}
         if (dash != null && dash.IsDashing)
         {
             rb.linearVelocity = new Vector3(dash.DashDirection.x * dash.dashSpeed, rb.linearVelocity.y, dash.DashDirection.z * dash.dashSpeed);
